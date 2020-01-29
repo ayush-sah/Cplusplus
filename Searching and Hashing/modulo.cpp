@@ -21,7 +21,6 @@ class hashing{
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
-                
                 if (input < 0){
                     cout << "Invalid Input. Try Again\n";
                     n++;continue;

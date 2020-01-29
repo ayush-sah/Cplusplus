@@ -23,16 +23,17 @@ class hashing{
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
+                
+                if (input < 0){
+                    cout << "Invalid Input. Try Again\n";
+                    n++;continue;
+                }
 
                 index = input*input;
 
                 while(int(log10(index)+1)>2){
                     index /= 10;
-
-                    no_of_digits = log10(index);
-                    divisor = pow(10.0,float(no_of_digits));
-                    index %= divisor;
-
+                    index %= int(pow(10.0,float(int(log10(index)))));
                     if(index<size)
                         break;
                 }
