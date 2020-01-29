@@ -1,10 +1,12 @@
 #include<iostream>
 #include<math.h>
+
 using namespace std;
 
 class hashing{
     private:
-        int n, size, *arr, input, index, *loc, no_of_digits_locations;
+        int n, size, *arr, input;
+        unsigned long int index;
     public:
         hashing(){
             do{
@@ -13,37 +15,29 @@ class hashing{
                 cout << "Enter the no. of digits you want to insert: ";
                 cin >> n;
             }while(n>size);
-            arr = new int[size];
-            cout << "\nEnter the no. of digits you want to extract: ";
-            cin >> no_of_digits_locations;
-            loc = new int[no_of_digits_locations];
-            for(int i = 0; i < no_of_digits_locations; i++){
-                cout << "Enter location no. " << i+1 << " you want to extract: ";
-                cin >> loc[i];
-            }
-            sort_array();
-
+            
             arr = new int[size];
 
             for(int i = 0; i < size; i++)
                 arr[i] = -1;
         }
 
-        void digit_extraction(){
+        void fold_shift(){
             cout << endl;
             while(n--){
-                index = 0;
                 cout << "Enter value you want to insert: ";
                 cin >> input;
-
+                
                 if (input < 0){
                     cout << "Invalid Input. Try Again\n";
                     n++;continue;
                 }
-
-                for(int i = 0; i < no_of_digits_locations; i++)
-                    index += ((input % int(pow(10.0,float(loc[i]))))/(int(pow(10.0,float(loc[i])))/10))*int(pow(10.0,float(i)));
-                
+                int temp = input;
+                index = 0;
+                while(temp > 0){
+                    index += (temp%size);
+                    temp /= size;
+                }
 
                 if(index>=size)
                     index = index%size;
@@ -57,18 +51,6 @@ class hashing{
                 arr[index] = input;
             }
             display();
-        }
-        
-        void sort_array(){
-            for(int i = 0; i < no_of_digits_locations; i++){
-                for(int j = 0; j < (no_of_digits_locations-i)-1; j++){
-                    if(arr[j]>arr[j+1]){
-                        int temp = arr[j];
-                        arr[j] = arr[j+1];
-                        arr[j+1] = temp;
-                    }
-                }
-            }
         }
 
         void display(){
@@ -86,5 +68,5 @@ class hashing{
 
 int main(){
     hashing ob;
-    ob.digit_extraction();
+    ob.fold_shift();
 }
