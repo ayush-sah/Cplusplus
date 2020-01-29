@@ -5,7 +5,7 @@ using namespace std;
 class hashing{
     private:
         int n, size, *arr, input, no_of_digits, divisor;
-        unsigned long int location;
+        unsigned long int index;
     public:
         void midsquare(){
             do{
@@ -24,30 +24,30 @@ class hashing{
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
 
-                location = input*input;
+                index = input*input;
 
-                while(int(log10(location)+1)>2){
-                    location /= 10;
+                while(int(log10(index)+1)>2){
+                    index /= 10;
 
-                    no_of_digits = log10(location);
+                    no_of_digits = log10(index);
                     divisor = pow(10.0,float(no_of_digits));
-                    location %= divisor;
+                    index %= divisor;
 
-                    if(location<size)
+                    if(index<size)
                         break;
                 }
 
-                if(location>=size)
-                    location = location%size;
+                if(index>=size)
+                    index = index%size;
 
-                while(arr[location]!=-1){
-                    if(location < size-2)
-                        location++;
+                while(arr[index]!=-1){
+                    if(index < size-2)
+                        index++;
                     else
-                        location = 0;
+                        index = 0;
                 }
 
-                arr[location] = input;
+                arr[index] = input;
             }
 
             cout << "\n<---Index---><---Values--->\n";
