@@ -4,10 +4,10 @@ using namespace std;
 
 class hashing{
     private:
-        int n, size, *arr, input, no_of_digits, divisor;
+        int n, size, *arr, input;
         unsigned long int index;
     public:
-        void midsquare(){
+        hashing(){
             do{
                 cout << "Enter the size of the array: ";
                 cin >> size;
@@ -19,7 +19,9 @@ class hashing{
 
             for(int i = 0; i < size; i++)
                 arr[i] = -1;
+        }
 
+        void midsquare(){
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
@@ -50,7 +52,10 @@ class hashing{
 
                 arr[index] = input;
             }
+            display();
+        }
 
+        void display(){
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){
                 cout << "Index no. " << i << " : \t";
