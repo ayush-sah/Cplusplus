@@ -14,7 +14,7 @@ class hashing{
             }while(n>size);
 
             for(int i = 0; i < size; i++)
-                arr[i] = NULL;
+                arr[i] = 0;
                 
             while(n--){
                 cout << "\nEnter value you want to insert: ";
