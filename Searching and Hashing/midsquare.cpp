@@ -22,8 +22,9 @@ class hashing{
         }
 
         void midsquare(){
+            cout << endl;
             while(n--){
-                cout << "\nEnter value you want to insert: ";
+                cout << "Enter value you want to insert: ";
                 cin >> input;
                 
                 if (input < 0){
