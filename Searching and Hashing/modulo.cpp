@@ -21,11 +21,14 @@ class hashing{
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
+                
                 if (input < 0){
                     cout << "Invalid Input. Try Again\n";
                     n++;continue;
                 }
+                
                 index = input % size;
+                
                 while(arr[index]!=-1){
                     if(index < size-2)
                         index++;
@@ -34,9 +37,11 @@ class hashing{
                 }
                 arr[index] =  input;
             }
+
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){
                 cout << "Index no. " << i << " : \t";
+                
                 if(arr[i]==-1)
                     cout << "NULL" << endl;
                 else

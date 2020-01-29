@@ -23,29 +23,37 @@ class hashing{
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
+
                 location = input*input;
+
                 while(int(log10(location)+1)>2){
                     location /= 10;
+
                     no_of_digits = log10(location);
                     divisor = pow(10.0,float(no_of_digits));
                     location %= divisor;
+
                     if(location<size)
                         break;
                 }
+
                 if(location>=size)
                     location = location%size;
+
                 while(arr[location]!=-1){
                     if(location < size-2)
                         location++;
                     else
                         location = 0;
                 }
+
                 arr[location] = input;
             }
 
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){
                 cout << "Index no. " << i << " : \t";
+                
                 if(arr[i]==-1)
                     cout << "NULL" << endl;
                 else
