@@ -3,7 +3,7 @@ using namespace std;
 
 class hashing{
     private:
-        int n, size, arr[100], input, location;
+        int n, size, arr[100], input, index;
     public:
         void modulo(){
             do{
@@ -19,14 +19,14 @@ class hashing{
             while(n--){
                 cout << "\nEnter value you want to insert: ";
                 cin >> input;
-                location = input % size;
-                while(arr[location]!=0){
-                    if(location < size-2)
-                        location++;
+                index = input % size;
+                while(arr[index]!=0){
+                    if(index < size-2)
+                        index++;
                     else
-                        location = 0;
+                        index = 0;
                 }
-                arr[location] =  input;
+                arr[index] =  input;
             }
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){
