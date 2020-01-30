@@ -33,8 +33,8 @@ class arrays{
               }
             arr[j+1]=temp;
             cout << "Pass " << ++pass << ": ";
-            for(int i = 0; i < size; i++)
-                cout << arr[i] << " ";
+            for(j = 0; j <= i; j++)
+                cout << arr[j] << " ";
             cout << endl;
             }
             cout << endl;
