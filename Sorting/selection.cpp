@@ -30,8 +30,8 @@ class arrays{
                         max = j;
                     }
                 }
-                    temp = arr[size-i];
-                    arr[size-i] = arr[max];
+                    temp = arr[size-i-1];
+                    arr[size-i-1] = arr[max];
                     arr[max] = temp;
                     
                     cout << "Pass " << i+1 << ": "; 

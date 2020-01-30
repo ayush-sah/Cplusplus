@@ -28,8 +28,9 @@ class arrays{
         void shell_sort(){
           getdata();
           for(int increment = size/2; increment > 0; increment /= 2){
-            for(int j = increment; j < size; j++){
+
               swap = false;
+            for(int j = increment; j < size; j++){
               for(int k = j - increment; k >= 0; k -= increment){
                 if(arr[k+increment] > arr[k]){
                   break;
@@ -42,10 +43,9 @@ class arrays{
                 }
               }
             }
-            if(swap == true){
-            display();
-            }
           }
+            if(swap == true)
+            	display();
         }
 };
 

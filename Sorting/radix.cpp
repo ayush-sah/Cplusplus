@@ -13,6 +13,10 @@ class arrays{
             for(int i = 0; i < size; i++){
                 cout << "Enter element no. " << i+1 << " : ";
                 cin >> arr[i];
+		if(arr[i]<0){
+			cout << "Invalid input." << endl;
+			i--;		
+		}
             }
             pass = 0;
             cout << endl;
