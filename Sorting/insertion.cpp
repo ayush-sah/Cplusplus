@@ -3,7 +3,7 @@ using namespace std;
 
 class arrays{
     private:
-        int size, temp, arr[100], pass;
+        int size, temp, arr[100], pass, i;
         bool swap;
     public:
         void getdata(){
@@ -23,22 +23,19 @@ class arrays{
         }
 
         void insertion_sort(){
-            for(int i = 1; i < size; i++){
+            for(i = 1; i < size; i++){
               swap = false;
               temp = arr[i];
               int j = i-1;
               while(j>=0 && arr[j]>temp){
                 arr[j+1]=arr[j];
                 j--;
-                swap = true;
               }
-              if(swap == true){
-                arr[j+1]=temp;
-                cout << "Pass " << ++pass << ": ";
-                for(int i = 0; i < size; i++)
-                    cout << arr[i] << " ";
-                cout << endl;
-              }
+            arr[j+1]=temp;
+            cout << "Pass " << ++pass << ": ";
+            for(int i = 0; i < size; i++)
+                cout << arr[i] << " ";
+            cout << endl;
             }
             cout << endl;
         }
