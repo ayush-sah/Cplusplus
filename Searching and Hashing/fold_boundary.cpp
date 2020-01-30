@@ -35,26 +35,34 @@ class hashing{
                 int temp = input;
                 index = 0;
                 int round = 0;
+
                 while(temp > 0){
-                    if(++round%2!=0)
+                    if((round==0) || (temp<size))
                         index += rev(temp%size);
                     else
                         index += temp%size;
                     temp /= size;
+                    round++;
                 }
-
+                
+                index %= 100;
+                 
                 if(index>=size)
                     index = index%size;
 
-                while(arr[index]!=-1){
+                linear_probing();
+
+                arr[index] = input;
+            }
+            display();            
+        }
+        void linear_probing(){
+            while(arr[index]!=-1){
                     if(index < size-2)
                         index++;
                     else
                         index = 0;
                 }
-                arr[index] = input;
-            }
-            display();            
         }
         int rev(int num){
             if(num<10)
@@ -63,8 +71,7 @@ class hashing{
             {
                 int reverse = 0;
                 while(num>0){
-                    reverse *=10;
-                    reverse += (num%10);
+                    reverse = (reverse*10)+(num%10);
                     num /= 10;
                 }
                 return reverse;

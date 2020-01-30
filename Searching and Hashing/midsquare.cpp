@@ -45,18 +45,20 @@ class hashing{
                 if(index>=size)
                     index = index%size;
 
-                while(arr[index]!=-1){
-                    if(index < size-2)
-                        index++;
-                    else
-                        index = 0;
-                }
+                linear_probing();
 
                 arr[index] = input;
             }
             display();
         }
-
+        void linear_probing(){
+            while(arr[index]!=-1){
+                    if(index < size-2)
+                        index++;
+                    else
+                        index = 0;
+                }
+        }
         void display(){
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){

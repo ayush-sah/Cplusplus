@@ -42,23 +42,26 @@ class hashing{
                 }
 
                 for(int i = 0; i < no_of_digits_locations; i++)
-                    index += ((input % int(pow(10.0,float(loc[i]))))/(int(pow(10.0,float(loc[i])))/10))*int(pow(10.0,float(i)));
+                    index += ((input % int(pow(10.0,float(loc[i])))) / (int(pow(10.0,float(loc[i])))/10)) * int(pow(10.0,float(i)));
                 
 
                 if(index>=size)
                     index = index%size;
 
-                while(arr[index]!=-1){
+                linear_probing();
+
+                arr[index] = input;
+            }
+            display();
+        }
+        void linear_probing(){
+            while(arr[index]!=-1){
                     if(index < size-2)
                         index++;
                     else
                         index = 0;
                 }
-                arr[index] = input;
-            }
-            display();
         }
-        
         void sort_array(){
             for(int i = 0; i < no_of_digits_locations; i++){
                 for(int j = 0; j < (no_of_digits_locations-i)-1; j++){

@@ -31,17 +31,28 @@ class hashing{
                 
                 index = input % size;
                 
-                while(arr[index]!=-1){
-                    if(index < size-2)
-                        index++;
-                    else
-                        index = 0;
-                }
+                linear_probing();
                 arr[index] =  input;
             }
             display();
         }
-
+        void linear_probing(){
+            while(arr[index]!=-1){
+                if(index < size-2)
+                    index++;
+                else
+                    index = 0;
+            }
+        }
+        /*
+        void quadratic_probing(){
+            int num = 0;
+            while(arr[index]!=-1){
+                index = input;
+                index = input    + pow(index, ) 
+            }
+        }
+        */
         void display(){
             cout << "\n<---Index---><---Values--->\n";
             for(int i = 0; i < size; i++){
