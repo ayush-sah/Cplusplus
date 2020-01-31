@@ -19,7 +19,7 @@ class hashing{
             arr = new int[size];
 
             for(int i = 0; i < size; i++)
-                arr[i] = -1;
+                arr[i] = '\0';
         }
 
         void midsquare(){
@@ -52,7 +52,7 @@ class hashing{
             display();
         }
         void linear_probing(){
-            while(arr[index]!=-1){
+            while(arr[index]!='\0'){
                     if(index < size-2)
                         index++;
                     else
@@ -64,7 +64,7 @@ class hashing{
             for(int i = 0; i < size; i++){
                 cout << "Index no. " << i << " : \t";
                 
-                if(arr[i]==-1)
+                if(arr[i]=='\0')
                     cout << "NULL" << endl;
                 else
                     cout << arr[i] << endl;
