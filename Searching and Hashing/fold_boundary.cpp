@@ -22,7 +22,7 @@ class hashing{
                 arr[i] = -1;
         }
 
-        void fold_shift(){
+        void fold_boundary(){
             cout << endl;
             while(n--){
                 cout << "Enter value you want to insert: ";
@@ -94,5 +94,5 @@ class hashing{
 
 int main(){
     hashing ob;
-    ob.fold_shift();
+    ob.fold_boundary();
 }
