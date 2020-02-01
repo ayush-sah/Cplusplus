@@ -4,7 +4,7 @@ using namespace std;
 
 class Hashing{
     private:
-        int n, size, *arr, input, index, technique, no_of_digits_locations, *loc;
+        unsigned long long int n, size, *arr, input, index, technique, no_of_digits_locations, *loc;
     public:
         Hashing(){
             do{
@@ -14,7 +14,7 @@ class Hashing{
                 cin >> n;
             }while(n>size);
             
-            arr = new int[size];
+            arr = new unsigned long long int[size];
 
             for(int i = 0; i < size; i++)
                 arr[i] = '\0';
@@ -24,7 +24,7 @@ class Hashing{
             if(technique==3){
                 cout << "\nEnter the no. of digits you want to extract: ";
                 cin >> no_of_digits_locations;
-                loc = new int[no_of_digits_locations];
+                loc = new unsigned long long int[no_of_digits_locations];
 
                 for(int i = 0; i < no_of_digits_locations; i++){
                     cout << "Enter location no. " << i+1 << " you want to extract: ";
@@ -60,6 +60,8 @@ class Hashing{
                 }
             }
             display();
+            cout << endl << endl;
+
         }
         void modulo();
         void midsquare();
