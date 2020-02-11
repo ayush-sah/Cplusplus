@@ -1,25 +1,33 @@
 #include<iostream>
 #include<string>
+#include<sstream>
+
 using namespace std;
+
 class stack{
-    string str;
-    int *arr, top, action, i, temp;
+    private:
+    string str[100];
+    int arr, top, action, i, temp;
     public:
-        void postfix(){
+        stack(){
             cout << "Enter a string: ";
-            getline(cin, str);
-            str +=')';
+            i=0;
+            
+            while (cin.peek()!='\n')
+                cin >> str[i++];
+            str[i++]=')';
+
             top = -1;
-            if ((isNumber((str.at(0) - '0'))==true) && (isNumber((str.at(1) - '0'))==true)){
+            if ((isNumber((str[0] - '0'))==true) && (isNumber((str[1] - '0'))==true)){
                 arr = new int[str.length()];
-                for(i = 0; str.at(i) != ')'; i++){
-                    if(isNumber(str.at(i) - '0')==true){
-                        push(str.at(i) - '0');
+                for(i = 0; str[i] != ')'; i++){
+                    if(isNumber(str[i] - '0')==true){
+                        push(str[i] - '0');
                     }
-                    else if((str.at(i)=='+')||(str.at(i)=='-')||(str.at(i)=='*')||(str.at(i)=='/')){
+                    else if((str[i] == '+')||(str[i] == '-')||(str[i] == '*')||(str[i] == '/')){
                         int a = pop();
                         int b = pop();
-                        switch (str.at(i)){
+                        switch (str[i]){
                             case '+':
                                 push(b+a);
                                 break;
@@ -71,5 +79,4 @@ class stack{
 
 int main(){
     stack s;
-    s.postfix();
 }
