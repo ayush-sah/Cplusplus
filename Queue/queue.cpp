@@ -64,8 +64,9 @@ class queue{
         if(front>rear)
             cout << "No data to display.\n";
         else{
+            cout << "Queue is ";
             for(int i = front; i <= rear; i++)
-                cout << arr[i] << endl;
+                cout << arr[i] << " ";
         }
     }
 };

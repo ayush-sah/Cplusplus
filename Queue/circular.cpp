@@ -67,6 +67,7 @@ class queue{
                 rear = front = -1;
             }
             else{
+                cout << arr[front] << " has been removed.\n";
                 ++front %=size;
             }
         }
@@ -76,11 +77,10 @@ class queue{
         if(front==-1)
             cout << "No data to display.\n";
         else{
-            int temp = front;
-            do{
-                cout << arr[temp] << endl;
-                ++temp %= size;
-            }while(temp!=(rear+1)%size);
+            cout << "Queue is ";
+            for(int i = front; i != (rear+1)%size; ++i %= size)
+                cout << arr[i] << " ";
+            cout << endl;
         }
     }
 };
