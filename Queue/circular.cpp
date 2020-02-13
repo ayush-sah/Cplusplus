@@ -15,26 +15,12 @@ class queue{
         do{
             cout << "1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\nEnter action you want to perform: ";
             cin >> action;
-            switch (action)
-            {
-            case 1:
-                enqueue();
-                break;
-            
-            case 2:
-                dequeue();
-                break;
-
-            case 3:
-                display();
-                break;
-            
-            case 4:
-                break;
-            
-            default:
-                cout << "Invalid input." << endl;
-                break;
+            switch (action){
+            case 1:enqueue();break;
+            case 2:dequeue();break;
+            case 3:display();break;
+            case 4:          break;
+            default: cout << "Invalid input. Try Again" << endl;
             }
         }while(action != 4);
     }
@@ -56,7 +42,6 @@ class queue{
             arr[rear] = value;
         }
     }
-
     void dequeue(){
         if(rear==-1&&front==-1){
             cout << "Underflow\n";
@@ -72,7 +57,6 @@ class queue{
             }
         }
     }
-
     void display(){
         if(front==-1)
             cout << "No data to display.\n";
