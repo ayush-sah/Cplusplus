@@ -26,7 +26,7 @@ class queue{
     }
     void enqueue(){
         int value;
-        if((front == -1)&&(rear=-1)){
+        if(front == -1){
             front = rear = 0;
             cout << "Enter value: ";
             cin >> value;
@@ -43,7 +43,7 @@ class queue{
         }
     }
     void dequeue(){
-        if(rear==-1&&front==-1){
+        if(rear == -1){
             cout << "Underflow\n";
         }
         else{
@@ -62,9 +62,9 @@ class queue{
             cout << "No data to display.\n";
         else{
             cout << "Queue is ";
-            for(int i = front; i != (rear+1)%size; ++i %= size)
+            for(int i = front; i != rear; ++i %= size)
                 cout << arr[i] << " ";
-            cout << endl;
+            cout << arr[rear] << endl;
         }
     }
 };
