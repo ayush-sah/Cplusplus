@@ -61,7 +61,6 @@ class Stack{
     void push(char c){
         stack[++top] = c;
     }
-
     char pop(){
         return stack[top--];
     }

@@ -18,7 +18,7 @@ class stack{
 
             for(i=0;i < str.length(); i++){
                 if(top==-1 && str.at(i)==')'){
-                    cout << "Invalid Input.";
+                    cout << "Invalid Input.\n";
                     break;
                 }
                 else{

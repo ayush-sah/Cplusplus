@@ -12,7 +12,7 @@ class stack{
             arr = new int[size];
             top = -1;
             do{
-                cout << "\n\n1. Push\n2. Pop\n3. Display\n4. Exit\nEnter action no. you want to perform: ";
+                cout << "\n1. Push\n2. Pop\n3. Display\n4. Exit\nEnter action no. you want to perform: ";
                 cin >> action;
                 switch (action)
                 {
