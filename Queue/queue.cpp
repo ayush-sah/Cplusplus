@@ -51,11 +51,8 @@ class queue{
     }
 
     void dequeue(){
-        if(front>rear){
+        if(front>rear)
             cout << "Underflow\n";
-            front = 0;
-            rear = -1;
-        }
         else
             cout << arr[front++] << " has been removed.\n";
     }
