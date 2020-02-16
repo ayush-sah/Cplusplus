@@ -3,17 +3,20 @@
 using namespace std;
 
 class queue{
-    int *arr, size, front, rear;
+    int *arr, size, front, rear, rev_front, rev_rear;
 
     public:
     queue(){
         cout << "Enter size of queue: ";
         cin >> size;
-        front = rear = -1;
+        front = 0; rear = -1;
+        rev_front = size-1; rev_rear = size;
         arr = new int[size];
+        for(int i = 0; i < size; i++)
+            arr[i] = '\0';
         int action;
         do{
-            cout << "1. Front Enqueue\n2. Rear Enqueue\n3. Front Dequeue\n4. Rear Dequeue\n5. Display\n6. Exit\nEnter action you want to perform: ";
+            cout << "\n1. Front Enqueue\n2. Rear Enqueue\n3. Front Dequeue\n4. Rear Dequeue\n5. Display\n6. Exit\nEnter action you want to perform: ";
             cin >> action;
             switch (action){
             case 1: front_enqueue(); break;
@@ -26,93 +29,71 @@ class queue{
                 cout << "Invalid input." << endl;
                 break;
             }
-        }while(action != 4);
+        }while(action != 6);
     }
 
     void front_enqueue(){
         int value;
-        if(front == -1){
-            front = rear = 0;
-            cout << "Enter value: ";
-            cin >> value;
-            arr[rear] = value;
+        if(rear+1==rev_rear && arr[rear+1]!='\0'){
+            if(rev_rear != size)
+                cout << "Delete from rear side to add more elements.\n";
+            else
+                cout << "Overflow.\n";
         }
         else{
-            if(front==0)
-                front = size;
-            
-            if((front-1)%size==rear){
-                cout << "Overflow.\n";
-            }
-            else{
-                cout << "Enter value: ";
-                cin >> value;
-                --front %= size;
-                arr[front] = value;
-            }
+            cout << "Enter value you want to insert: ";
+            cin >> value;
+            arr[++rear] = value;    
         }
     }
-
+    
     void rear_enqueue(){
         int value;
-        if(front == -1){
-            front = rear = 0;
-            cout << "Enter value: ";
-            cin >> value;
-            arr[rear] = value;
-        }
-        else if((rear+1)%size==front){
-            cout << "Overflow.\n";
+        if(rev_rear-1==rear && arr[rev_rear-1]!='\0'){
+            if(rear!=-1)
+                cout << "Delete from front side to add more elements.\n";
+            else
+                cout << "Overflow\n";
         }
         else{
-            cout << "Enter value: ";
+            cout << "Enter value you want to insert: ";
             cin >> value;
-            ++rear %= size;
-            arr[rear] = value;
+            arr[--rev_rear] = value;    
         }
     }
 
     void front_dequeue(){
-        if(rear==-1&&front==-1){
-            cout << "Underflow\n";
-        }
+        if(front>rear)
+            cout << "No Element to delete from the Front side.\n";
         else{
-            if(rear==front){
-                cout << arr[front] << " has been removed.\n";
-                rear = front = -1;
-            }
-            else{
-                ++front %=size;
-            }
+            cout << arr[front] << " has been removed.\n";
+            arr[front++] = '\0';
         }
     }
 
     void rear_dequeue(){
-        if(rear==-1&&front==-1){
-            cout << "Underflow\n";
-        }
+        if(rev_front<rev_rear)
+            cout << "No Element to delete from the Rear side.\n";
         else{
-            if(rear==front){
-                cout << arr[front] << " has been removed.\n";
-                rear = front = -1;
-            }
-            else{
-                --rear %=size;
-            }
+            cout << arr[rev_front] << " has been removed.\n";
+            arr[rev_front--] = '\0';
         }
     }
 
     void display(){
-        if(front==-1)
-            cout << "No data to display.\n";
+        if(rear==-1 & rev_rear==-1)
+            cout << "No data to Display.";
         else{
-            int temp = front;
             cout << "Queue is ";
-            do{
-                cout << arr[temp] << " ";
-                ++temp %= size;
-            }while(temp!=(rear+1)%size);
+            for(int i = 0; i < size; i++){
+                if (arr[i] == '\0')
+                    cout << "NULL";
+                else
+                    cout << arr[i];
+                cout << " ";
+            }
         }
+        cout << endl;
     }
 };
 
