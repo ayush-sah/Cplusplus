@@ -1,2 +1,2 @@
-# C++
-C++ Codes performed during Lab of Data Structures
+# Data Structures
+Data Structures programs performed during Lab.
