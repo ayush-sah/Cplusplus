@@ -14,7 +14,7 @@ class queue{
         arr = new int[size];
         int action;
         do{
-            cout << "1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\nEnter action you want to perform: ";
+            cout << "\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\nEnter action you want to perform: ";
             cin >> action;
             switch (action)
             {
