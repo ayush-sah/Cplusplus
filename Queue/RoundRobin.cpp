@@ -7,11 +7,13 @@ using namespace std;
     1 - copy of arrival time
     2 - burst time
     3 - copy of burst time
-    4 - waiting time
+    4 - completion time
+    5 - Turn Around Time
+    6 - Waiting Time
 */
 
 class queue{
-    int **rr, num, tq, min, time, tbt, i, *cirq, front, rear, process, flag;
+    int **rr, num, tq, min, time, tbt, i, *cirq, front, rear, flag, tat, wt;
     public:
     queue(){
         front = rear = -1;
@@ -20,10 +22,9 @@ class queue{
         rr = new int*[num];
         tbt = 0;
         time = 0;
-        // time = minimum();
         for(i = 0; i < num; i++){
             rr[i] = new int[10];
-            cout << "Enter the arrival time for Process " << i+1 << ": ";
+            cout << "\nEnter the arrival time for Process " << i+1 << ": ";
             cin >> rr[i][0];
             rr[i][1] = rr[i][0];
             cout << "Enter the burst time for Process " << i+1 << ": ";
@@ -31,38 +32,66 @@ class queue{
             rr[i][3] = rr[i][2];
             tbt += rr[i][2];
         }
-        cout << "Enter time quantum: ";
+        cout << "\nEnter time quantum: ";
         cin >> tq;
+        cout << "\nThe values you entered are: " << endl;
+        cout << "\t|\tPROCESS\t|\t|\tArrival\t|\t|\tBurst\t|" << endl;
+        cout << "     ____________________________________________________________________" << endl << endl;
+        for(int i = 0; i < num; i++)
+            cout << "\t|\tP" << i+1 << "\t|\t|\t"<< rr[i][0] << "\t|\t|\t" << rr[i][2] <<"\t|"<< endl;
+        cout << endl;
         cirq = new int[num];
+        cout << "Execution queue is ";
         queuing();
         while(time<tbt){
-            process = dequeue();
-            if(rr[process][3]>=tq){
-                rr[process][3] -= tq;
-                cout << "P" << process+1 << "-->";
-                time += tq;
+            if((front==-1) && (rear==-1)){
+                cout << "IDLE" << " ";
+                time++;
             }
             else{
-                time += rr[process][3];
-                rr[process][3] = 0;
-                cout << "P" << process+1 << "-->";
+                if(rr[cirq[front]][3]>tq){
+                    cout << "P" << cirq[front]+1 << " ";
+                    rr[cirq[front]][3] -= tq;
+                    time += tq;
+                }
+                else{
+                    time += rr[cirq[front]][3];
+                    rr[cirq[front]][3] = 0;
+                    cout << "P" << cirq[front]+1 << " ";
+                    rr[cirq[front]][4] = time;
+                }
             }
             queuing();
+            dequeue();
         }
+        cout << endl;
+        tat = wt = 0;
+        for(int i = 0; i < num; i++){
+            rr[i][5] = rr[i][4] - rr[i][0];
+            tat += rr[i][5];
+        }
+        for(int i = 0; i < num; i++){
+            rr[i][6] = rr[i][5] - rr[i][2];
+            wt += rr[i][6];
+        }
+        cout << "Avg Turn Around time is " << tat/num << endl;
+        cout << "Avg Waiting time is " << wt/num << endl;
     }
 
     void queuing(){
-        for(i = 0; i < num; i++){
+        for(int i = 0; i < num; i++){
             flag = 0;
-            for(int j = front; j != rear; ++j %= num){
-                if((cirq[j] == i) || (cirq[rear] == i))
+            if((front!=-1)&&(rear!=-1)){
+                for(int j = front; j != rear; ++j %= num){
+                    if(cirq[j] == i)
+                        flag = 1;
+                }
+                if(cirq[rear]==i)
                     flag = 1;
             }
             if(flag == 0){
-                if(rr[i][3]>0){
-                    if(rr[i][1] <= time)
-                        enqueue(i);
-                }
+                if((rr[i][3]>0) && (rr[i][1] <= time))
+                    enqueue(i);
             }
         }
     }
@@ -76,18 +105,8 @@ class queue{
             cout << cirq[rear] << endl;
         }
     }
-    /*
-    int minimum(){
-        min = rr[0][0];
-        for(int j = 0; j < num; j++){
-            if (min > rr[j][0])
-                min = rr[j][0];
-        }
-        return min;
-    }
-    */
     void enqueue(int a){
-        if(front == -1){
+        if((front==-1)&&(rear==-1)){
             front = rear = 0;
             cirq[rear] = a;
         }
@@ -96,13 +115,11 @@ class queue{
             cirq[rear] = a;
         }
     }
-    int dequeue(){
-        int k = front;
+    void dequeue(){
         if(rear==front)
             rear = front = -1;
         else
             ++front %= num;
-        return k;
     }
 
 };
