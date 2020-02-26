@@ -3,13 +3,14 @@ using namespace std;
 
 struct node{
     int data;
-    struct node *next;
+    struct node *lptr;
+    struct node *rptr;
 }*list=NULL, *p, *q, *r, *s;
 
-class singly{
+class doubly{
     int action, value, element;
     public:
-    singly(){
+    doubly(){
         do{
             cout << endl << "1. Insert at Begining\n2. Insert at the End\n3. Insert Before an element.\n4. Insert after an element\n5. Delete at beginning\n6. Delete at end\n7. Delete Particular value\n8. Display\n9.Count\n10. Reverse\n11. Sort\n12. Exit\nEnter action you want to perform: ";
             cin >> action;
@@ -62,9 +63,12 @@ class singly{
         p = (struct node*)malloc(sizeof(node));
         p->data = value;
         if(list==NULL)
-            p->next = NULL;
-        else
-            p->next = list;
+            p->lptr = p->rptr = NULL;
+        else{
+            p->lptr = NULL;
+            p->rptr = list;
+            list->lptr = p;
+        }
         list = p;
     }
 
@@ -75,15 +79,16 @@ class singly{
         q = (struct node*)malloc(sizeof(node));
         p->data = value;
         if(list==NULL){
-            p->next = NULL;
+            p->lptr = p->rptr = NULL;
             list = p;
         }
         else{
             q = list;
-            while(q->next!=NULL)
-                q = q->next;
-            q->next = p;
-            p->next = NULL;
+            while(q->rptr!=NULL)
+                q = q->rptr;
+            q->rptr = p;
+            p->rptr = NULL;
+            p->lptr = q;
         }
     }
     void insert_be(){
@@ -95,19 +100,21 @@ class singly{
         p->data = value;
         q = list;
      
-        while((q->data != element) && (q->next != NULL)){
+        while((q->data != element) && (q->rptr != NULL)){
             r = q;
-            q = q->next;
+            q = q->rptr;
         }
-        if(q->data==element)
-         {
+        if(q->data==element){
             if(list->data==element){
-            p->next = q;
-            list = p;
+                p->rptr = q;
+                p->lptr = NULL;
+                list = p;
             }
             else{
-            r->next = p;
-            p->next = q;
+                r->rptr = p;
+                p->lptr = r;
+                p->rptr = q;
+                q->lptr = p;
             }
         }
         else{
@@ -123,20 +130,23 @@ class singly{
         p = (struct node*)malloc(sizeof(node));
         p->data = value;
         q = list;
-        r = q->next;
-        while((q->data != element) && (q->next != NULL)){
+        r = q->rptr;
+        while((q->data != element) && (q->rptr != NULL)){
             q = r;
-            r = r->next;
+            r = r->rptr;
         }
         if(q->data != element)
             cout << "Data not found.";
         else if(r == NULL){
-            q->next = p;
-            p->next = NULL;
+            q->rptr = p;
+            p->lptr = q;
+            p->rptr = NULL;
         }
         else{
-            q->next = p;
-            p->next = r;
+            q->rptr = p;
+            p->lptr = q;
+            p->rptr = r;
+            r->lptr = p;
         }
     }
 
@@ -144,7 +154,7 @@ class singly{
         if(list==NULL)
             cout << "List is empty nothing to delete.";
         else{
-            list = list->next;
+            list = list->rptr;
         } 
     }
 
@@ -153,11 +163,11 @@ class singly{
         if(list==NULL)
             cout << "List is empty nothing to delete.";
         else{
-            while(p->next != NULL){
+            while(p->rptr != NULL){
                 q = p;
-                p = p->next;
+                p = p->rptr;
             }
-            q->next = NULL;
+            q->rptr = NULL;
         }
     }
 
@@ -169,17 +179,17 @@ class singly{
         else{
             cout << "Enter value you want to delete: ";
             cin >> value;
-            while(p->data != value && p->next!=NULL){
+            while(p->data != value && p->rptr!=NULL){
                 q = p;
-                p = p->next;
+                p = p->rptr;
             }
             if(p->data != value)
-                cout << "Element not found.";
+                cout << "Data not found.";
             else{
                 if(p==q)
-                    list = p->next;
+                    list = p->rptr;
                 else
-                    q->next = p->next;
+                    q->rptr = p->rptr;
             }
         }
     }
@@ -192,7 +202,7 @@ class singly{
             cout << "Elements in the linked list are: ";
             while(p!=NULL){
                 cout << p->data << " ";
-                p = p->next;
+                p = p->rptr;
             }
         }
     }
@@ -202,7 +212,7 @@ class singly{
         p = list;
         while(p != NULL){
             count++;
-            p = p->next;
+            p = p->rptr;
         }
         cout << "Count = " << count << endl;
     }
@@ -214,15 +224,16 @@ class singly{
             struct node *temp;
             q = s = list;
             temp = NULL;
-            r = q->next;
-            while(r->next!=NULL){
+            r = q->rptr;
+            s->lptr = r;
+            while(r!=NULL){
                 temp = q;
                 q = r;
-                r = q->next;
-                q->next = temp;
+                r = q->rptr;
+                q->rptr = temp;
             }
             list = q;
-            s->next = NULL;
+            s->rptr = NULL;
             cout << "Linked List has been reversed.";
         }
     }
@@ -230,21 +241,21 @@ class singly{
     void sort(){
         p = list;
         int temp;
-        while(p->next!=NULL){
-            q = p->next;
-            while(q->next!=NULL){
+        while(p->rptr!=NULL){
+            q = p->rptr;
+            while(q->rptr!=NULL){
                 if(p->data > q->data){
                     temp = p->data;
                     p->data = q->data;
                     q->data = temp;
                 }
-                q = q->next;
+                q = q->rptr;
             }
-            p = p->next;
+            p = p->rptr;
         }
     }
 
 };
 int main(){
-    singly s;
+    doubly linkedList;
 }
