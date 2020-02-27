@@ -257,8 +257,8 @@ class doubly{
             p = p->rptr;
         }
     }
-
 };
+
 int main(){
     doubly linkedList;
 }

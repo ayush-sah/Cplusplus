@@ -2,60 +2,42 @@
 using namespace std;
 
 struct node{
-    int data;
+    int coeff, exponent;
     struct node *next;
-}*list=NULL, *p, *q, *r, *s;
+}*list[3], *p, *q, *r, *s;
 
 class singly{
-    int action, value, element;
+    int c, e, nodes1, nodes2, i;
     public:
     singly(){
-        do{
-            cout << endl << "1. Insert at Begining\n2. Insert at the End\n3. Insert Before an element.\n4. Insert after an element\n5. Delete at beginning\n6. Delete at end\n7. Delete Particular value\n8. Display\n9.Count\n10. Reverse\n11. Sort\n12. Exit\nEnter action you want to perform: ";
-            cin >> action;
-            switch (action)
-            {
-                case 1:
-                    insert_b();
-                    break;
-                case 2:
-                    insert_e();
-                    break;
-                case 3:
-                    insert_be();
-                    break;
-                case 4:
-                    insert_ae();
-                    break;
-                case 5:
-                    delete_b();
-                    break;
-                case 6:
-                    delete_e();
-                    break;
-                case 7:
-                    delete_v();
-                    break;
-                case 8:
-                    display();
-                    break;
-                case 9:
-                    count();
-                    break;
-                case 10:
-                    reverse();
-                    break;
-                case 11:
-                    sort();
-                    break;
-                case 12:
-                    break;
-            default:
-                break;
-            }
-        }while(action!=12);
-    }
+        i = 0;
+        list = NULL;
+        cout << "Enter no. of nodes int 1st equation: ";
+        cin >> nodes1;
+        while(nodes1--){
+            cout << "Enter coeff: ";
+            cin >> c;
+            cout << "Enter its exponent: ";
+            cin >> e;
+            insert_e();
+            cout << endl;
+        }
+        i++;
+        cout << "Enter no. of nodes int 2nd equation: ";
+        cin >> nodes2;
+        while(nodes2--){
+            cout << "Enter coeff: ";
+            cin >> c;
+            cout << "Enter its exponent: ";
+            cin >> e;
+            insert_e();
+            cout << endl;
+        }
+        i++;
+        display();
 
+    }
+    /*
     void insert_b(){
         cout << "Enter value you want to insert: ";
         cin >> value;
@@ -67,25 +49,24 @@ class singly{
             p->next = list;
         list = p;
     }
-
+    */
     void insert_e(){
-        cout << "Enter value you want to insert: ";
-        cin >> value;
         p = (struct node*)malloc(sizeof(node));
-        q = (struct node*)malloc(sizeof(node));
-        p->data = value;
+        p->coeff = c;
+        p->exponent = e;
         if(list==NULL){
             p->next = NULL;
-            list = p;
+            list[i] = p;
         }
         else{
-            q = list;
+            q = list[i];
             while(q->next!=NULL)
                 q = q->next;
             q->next = p;
             p->next = NULL;
         }
     }
+    /*
     void insert_be(){
         cout << "Enter element before you want to insert the value: ";
         cin >> element;
@@ -187,20 +168,21 @@ class singly{
             }
         }
     }
+    */
 
     void display(){
-        if(list==NULL)
+        if(list[0]==NULL)
             cout << "No Element in the linked list.";
         else{
-            p = list;
+            p = list[0];
             cout << "Elements in the linked list are: ";
             while(p!=NULL){
-                cout << p->data << " ";
+                cout << p->coeff << " ";
                 p = p->next;
             }
         }
     }
-
+    /*
     void count(){
         int count = 0;
         p = list;
@@ -247,6 +229,7 @@ class singly{
             p = p->next;
         }
     }
+    */
 };
 
 int main(){

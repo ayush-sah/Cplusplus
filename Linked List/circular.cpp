@@ -51,6 +51,7 @@ class singly{
                 case 12:
                     break;
             default:
+                cout << "Invalid entry.\nTry again.\n";
                 break;
             }
         }while(action!=12);
@@ -60,11 +61,17 @@ class singly{
         cout << "Enter value you want to insert: ";
         cin >> value;
         p = (struct node*)malloc(sizeof(node));
+        
         p->data = value;
         if(list==NULL)
-            p->next = NULL;
-        else
+            p->next = p;
+        else{
+            q = list;
+            while(q->next!=list)
+                q = q->next;
+            q->next = p;
             p->next = list;
+        }
         list = p;
     }
 
@@ -75,15 +82,15 @@ class singly{
         q = (struct node*)malloc(sizeof(node));
         p->data = value;
         if(list==NULL){
-            p->next = NULL;
+            p->next = p;
             list = p;
         }
         else{
             q = list;
-            while(q->next!=NULL)
+            while(q->next!=list)
                 q = q->next;
             q->next = p;
-            p->next = NULL;
+            p->next = list;
         }
     }
     void insert_be(){
@@ -102,12 +109,16 @@ class singly{
         if(q->data==element)
          {
             if(list->data==element){
-            p->next = q;
-            list = p;
+                s = list;
+                while(s->next!=list)
+                    s = s->next;
+                s->next = p;
+                p->next = list;
+                list = p;
             }
             else{
-            r->next = p;
-            p->next = q;
+                r->next = p;
+                p->next = q;
             }
         }
         else{
@@ -130,9 +141,9 @@ class singly{
         }
         if(q->data != element)
             cout << "Data not found.";
-        else if(r == NULL){
+        else if(r == list){
             q->next = p;
-            p->next = NULL;
+            p->next = list;
         }
         else{
             q->next = p;
@@ -144,45 +155,70 @@ class singly{
         if(list==NULL)
             cout << "List is empty nothing to delete.";
         else{
-            list = list->next;
+            p = list;
+            while(p->next!=list){
+                q = p;
+                p = p->next;
+            }
+            if(list == p)
+                list = NULL;
+            else{
+                q->next = list;
+                list = list->next;
+            }
             cout << "Element has been deleted." << endl;
         } 
     }
 
     void delete_e(){
-        p = list;
         if(list==NULL)
-            cout << "List is empty nothing to delete.";
+            cout << "List is empty nothing to delete." << endl;
         else{
-            while(p->next != NULL){
+            p = list;
+            while(p->next != list){
                 q = p;
                 p = p->next;
             }
-            q->next = NULL;
+            if(list == p)
+                list = NULL;
+            else
+                q->next = list;
             cout << "Element has been deleted." << endl;
         }
     }
 
     void delete_v(){
-        p = list;
-        q = p;
         if(list==NULL)
-            cout << "List is empty nothing to delete.";
+            cout << "List is empty nothing to delete." << endl;
         else{
+            p = list;
+            q = p;
             cout << "Enter value you want to delete: ";
             cin >> value;
-            while(p->data != value && p->next!=NULL){
+            while(p->data != value && p->next!=list){
                 q = p;
                 p = p->next;
             }
             if(p->data != value)
                 cout << "Element not found.";
             else{
-                if(p==q)
-                    list = p->next;
+                if(p==q){
+                    if(p->next==p)
+                        list = NULL;
+                    else{
+                        r = list;
+                        while(r->next!=list){
+                            r = r->next;
+                        }
+                        r = p->next;
+                        list = p;
+                    }
+                }
+                else if(p->next = list){
+                    q->next = list;
+                }
                 else
                     q->next = p->next;
-                
                 cout << "Element has been deleted." << endl;
             }
         }
@@ -190,23 +226,26 @@ class singly{
 
     void display(){
         if(list==NULL)
-            cout << "No Element in the linked list.";
+            cout << "No Element in the linked list." << endl;
         else{
             p = list;
             cout << "Elements in the linked list are: ";
-            while(p!=NULL){
+            do{
                 cout << p->data << " ";
                 p = p->next;
-            }
+            }while(p!=list);
+            cout << endl;
         }
     }
 
     void count(){
         int count = 0;
-        p = list;
-        while(p != NULL){
-            count++;
-            p = p->next;
+        if(list!=NULL){
+            p = list;
+            do{
+                count++;
+                p = p->next;
+            }while(p != list);
         }
         cout << "Count = " << count << endl;
     }
@@ -219,14 +258,14 @@ class singly{
             q = s = list;
             temp = NULL;
             r = q->next;
-            while(r->next!=NULL){
+            while(r!=list){
                 temp = q;
                 q = r;
                 r = q->next;
                 q->next = temp;
             }
             list = q;
-            s->next = NULL;
+            s->next = q;
             cout << "Linked List has been reversed.";
         }
     }
@@ -234,9 +273,9 @@ class singly{
     void sort(){
         p = list;
         int temp;
-        while(p->next!=NULL){
+        while(p->next!=list){
             q = p->next;
-            while(q->next!=NULL){
+            while(q!=list){
                 if(p->data > q->data){
                     temp = p->data;
                     p->data = q->data;
@@ -246,6 +285,8 @@ class singly{
             }
             p = p->next;
         }
+        cout << "Elements sorted...";
+        display();
     }
 };
 
