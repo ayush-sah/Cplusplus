@@ -145,6 +145,7 @@ class singly{
             cout << "List is empty nothing to delete.";
         else{
             list = list->next;
+            cout << "Element has been deleted." << endl;
         } 
     }
 
@@ -158,6 +159,7 @@ class singly{
                 p = p->next;
             }
             q->next = NULL;
+            cout << "Element has been deleted." << endl;
         }
     }
 
@@ -180,6 +182,8 @@ class singly{
                     list = p->next;
                 else
                     q->next = p->next;
+                
+                cout << "Element has been deleted." << endl;
             }
         }
     }

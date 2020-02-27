@@ -155,7 +155,8 @@ class doubly{
             cout << "List is empty nothing to delete.";
         else{
             list = list->rptr;
-        } 
+            cout << "Element has been deleted." << endl;
+        }
     }
 
     void delete_e(){
@@ -168,6 +169,7 @@ class doubly{
                 p = p->rptr;
             }
             q->rptr = NULL;
+            cout << "Element has been deleted." << endl;
         }
     }
 
@@ -190,6 +192,7 @@ class doubly{
                     list = p->rptr;
                 else
                     q->rptr = p->rptr;
+                cout << "Element has been deleted." << endl;
             }
         }
     }
