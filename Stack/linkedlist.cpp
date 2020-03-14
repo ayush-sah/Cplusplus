@@ -4,7 +4,7 @@ using namespace std;
 struct node{
     int data;
     struct node *next;
-}*list=NULL, *p, *q, *r, *s;
+}*list = NULL, *top = NULL, *p, *q;
 
 class stack{
     int action, value;
@@ -38,25 +38,39 @@ class stack{
             cin >> value;
             p = (struct node*)malloc(sizeof(node));
             p->data = value;
+            p->next = NULL;
+            top = p;
             if(list==NULL)
-                p->next = NULL;
-            else
-                p->next = list;
-            list = p;
+                list = p;
+            else{
+                q = list;
+                while(q->next!=NULL)
+                    q = q->next;
+                q->next = p;
+            }
         }
 
         void pop(){
             if(list==NULL)
-                cout << "Stack is empty nothing to delete.";
+                cout << "Underflow.\n";
             else{
-                cout << list->data << " has been popped." << endl;
-                list = list->next;
+                cout << top->data << " has been popped." << endl;
+                q = list;
+                if(q->next==NULL)
+                    list = top = NULL;
+                else{
+                    while(q->next != top && q->next!=NULL)
+                        q = q->next;
+                    free(top);
+                    top = q;
+                    q->next=NULL;
+                }
             }
         }
 
         void display(){
         if(list==NULL)
-            cout << "No Element in the stack.";
+            cout << "No Element in the stack." << endl;
         else{
             p = list;
             cout << "Elements in the stack are: ";
@@ -64,6 +78,7 @@ class stack{
                 cout << p->data << " ";
                 p = p->next;
             }
+            cout << endl;
         }
     }        
 };
