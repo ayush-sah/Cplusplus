@@ -4,7 +4,7 @@ using namespace std;
 struct node{
     int data;
     struct node *next;
-}*list=NULL, *p, *q, *r, *s;
+}*front=NULL, *rear=NULL, *p, *q, *r, *s;
 
 class queue{
     int action, value;
@@ -41,35 +41,35 @@ class queue{
         cout << "Enter value you want to insert: ";
         cin >> value;
         p = (struct node*)malloc(sizeof(node));
-        q = (struct node*)malloc(sizeof(node));
         p->data = value;
-        if(list==NULL){
-            p->next = NULL;
-            list = p;
+        p->next = NULL;
+        if(front==NULL){
+            front = p;
+            front = rear = p;
         }
         else{
-            q = list;
+            q = front;
             while(q->next!=NULL)
                 q = q->next;
             q->next = p;
-            p->next = NULL;
+            rear = p;
         }
     }
 
     void dequeue(){
-        if(list==NULL)
-            cout << "Queue is empty nothing to delete." << endl;
+        if(front==NULL)
+            cout << "Underflow." << endl;
         else{
-            cout << list->data << " has been removed." << endl;
-            list = list->next;
+            cout << front->data << " has been removed." << endl;
+            front = front->next;
         }
     }
 
     void display(){
-        if(list==NULL)
+        if(front==NULL)
             cout << "No Element in the Queue.";
         else{
-            p = list;
+            p = front;
             cout << "Elements in the Queue are: ";
             while(p!=NULL){
                 cout << p->data << " ";
