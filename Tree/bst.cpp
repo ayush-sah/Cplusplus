@@ -39,29 +39,52 @@ class bst{
             }
         }while(action!=6)
     }
-    insert(){
+    void insert(){
         int value;
         cout << "Enter value you want to insert: ";
         cin >> value;
-
+        p = (struct node*)malloc(sizeof(node));
+        p->data = value;
+        p->lptr = NULL;
+        p->rptr = NULL;
         if(list == NULL){
-            
+            list = p;
+        }
+        else{
+            q = list;
+            while(q->lptr || q->rptr){
+                if(value < q->data){
+                    if(q->lptr)
+                        q = q->lptr;
+                    else
+                        break;
+                }
+                else if(value > q->data){
+                    if(q->rptr)
+                        q = q->lptr;
+                    else
+                        break;
+                }
+            }
+            if(value < q->data)
+                q->lptr = p;
+            else if(value > q->rptr)
+                q->rptr = p;
         }
     }
-    display(){
+    void display(){
+        
+    }
+    void traversal(){
 
     }
-    traversal(){
+    void delete_e(){
 
     }
-    delete_e(){
-
-    }
-    search(){
+    void search(){
 
     }
 }
-
 
 int main(){
     bst tree;
