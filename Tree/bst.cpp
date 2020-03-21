@@ -3,7 +3,7 @@ using namespace std;
 
 
 struct node{
-    int date;
+    int data;
     struct node *lptr, *rptr;
 }*list = NULL, *p, *q, *r, *s;
 
@@ -20,7 +20,9 @@ class bst{
                     insert();
                     break;
                 case 2:
-                    display();
+                    cout << "Elements in the tree are: ";
+                    display(list);
+                    cout << endl;
                     break;
                 case 3:
                     traversal();
@@ -37,7 +39,7 @@ class bst{
                     cout << "Invalid Input. Please try again." << endl;
                     break;
             }
-        }while(action!=6)
+        }while(action!=6);
     }
     void insert(){
         int value;
@@ -61,19 +63,23 @@ class bst{
                 }
                 else if(value > q->data){
                     if(q->rptr)
-                        q = q->lptr;
+                        q = q->rptr;
                     else
                         break;
                 }
             }
             if(value < q->data)
                 q->lptr = p;
-            else if(value > q->rptr)
+            else if(value > q->data)
                 q->rptr = p;
         }
     }
-    void display(){
-        
+    void display(struct node *l){
+        if(l){
+            display(l->lptr);
+            cout << l->data << " ";
+            display(l->rptr);
+        }
     }
     void traversal(){
 
@@ -84,7 +90,7 @@ class bst{
     void search(){
 
     }
-}
+};
 
 int main(){
     bst tree;
