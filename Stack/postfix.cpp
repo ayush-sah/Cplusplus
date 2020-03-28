@@ -7,27 +7,33 @@ using namespace std;
 class stack{
     private:
     string str[100];
-    int arr, top, action, i, temp;
+    int *arr, top, action, i, temp, s;
     public:
         stack(){
             cout << "Enter a string: ";
-            i=0;
-            
-            while (cin.peek()!='\n')
-                cin >> str[i++];
-            str[i++]=')';
-
+            s=0;
+            char c;
+            str[0] = "";
+            while (cin.peek()!='\n'){
+                if(cin.peek()==' '){
+                    s++;
+                    str[s] = "";
+                }
+                cin >> c;
+                str[s]+=c;
+            }
+            str[++s]=")";
             top = -1;
-            if ((isNumber((str[0] - '0'))==true) && (isNumber((str[1] - '0'))==true)){
-                arr = new int[str.length()];
-                for(i = 0; str[i] != ')'; i++){
-                    if(isNumber(str[i] - '0')==true){
-                        push(str[i] - '0');
+            if (isNumber(str[0])==1 && isNumber(str[1])==1){
+                arr = new int[s+1];
+                for(i = 0; str[i] != ")"; i++){
+                    if(isNumber(str[i])==1){
+                        push(stoi(str[i]));
                     }
-                    else if((str[i] == '+')||(str[i] == '-')||(str[i] == '*')||(str[i] == '/')){
+                    else if((str[i] == "+")||(str[i] == "-")||(str[i] == "*")||(str[i] == "/")){
                         int a = pop();
                         int b = pop();
-                        switch (str[i]){
+                        switch (char(str[i][0])){
                             case '+':
                                 push(b+a);
                                 break;
@@ -46,18 +52,16 @@ class stack{
                         }
                     }
                 }
-                if(top == 0){
-                    cout << "Answer= " << arr[0];
-                }
-                else{
+                if(top == 0)
+                    cout << "Answer = " << arr[0] << endl;
+                else
                     cout << "Wrong Postfix operation.";
-                }
             }
             else
                 cout << "Not a Postfix expression.\n";
         }
         void push(int n){
-            if(top==str.length()-1)
+            if(top==s)
                 cout << "Error push";
             else
                 arr[++top] = n;
@@ -69,11 +73,13 @@ class stack{
             else
                 return arr[top--];
         }
-        bool isNumber(int n){
-            if ((n == 0)||(n == 1)||(n == 2)||(n == 3)||(n == 4)||(n == 5)||(n == 6)||(n == 7)||(n == 8)||(n == 9))
-                return true;
-            else
-                return false;
+        bool isNumber(string s) 
+        {
+            for (int i = 0; i < s.length(); i++) 
+                if (isdigit(s[i]) == false) 
+                    return false; 
+        
+            return true; 
         }
 };
 

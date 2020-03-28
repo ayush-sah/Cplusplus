@@ -111,7 +111,7 @@ class singly{
             }
         }
         else{
-            cout << "Data not found.";
+            cout << "Data not found." << endl;
         }
         
     }
@@ -129,7 +129,7 @@ class singly{
             r = r->next;
         }
         if(q->data != element)
-            cout << "Data not found.";
+            cout << "Data not found." << endl;
         else if(r == NULL){
             q->next = p;
             p->next = NULL;
@@ -142,7 +142,7 @@ class singly{
 
     void delete_b(){
         if(list==NULL)
-            cout << "List is empty nothing to delete.";
+            cout << "List is empty nothing to delete." << endl;
         else{
             list = list->next;
             cout << "Element has been deleted." << endl;
@@ -152,7 +152,7 @@ class singly{
     void delete_e(){
         p = list;
         if(list==NULL)
-            cout << "List is empty nothing to delete.";
+            cout << "List is empty nothing to delete." << endl;
         else{
             while(p->next != NULL){
                 q = p;
@@ -167,7 +167,7 @@ class singly{
         p = list;
         q = p;
         if(list==NULL)
-            cout << "List is empty nothing to delete.";
+            cout << "List is empty nothing to delete." << endl;
         else{
             cout << "Enter value you want to delete: ";
             cin >> value;
@@ -190,7 +190,7 @@ class singly{
 
     void display(){
         if(list==NULL)
-            cout << "No Element in the linked list.";
+            cout << "No Element in the linked list." << endl;
         else{
             p = list;
             cout << "Elements in the linked list are: ";
@@ -198,6 +198,7 @@ class singly{
                 cout << p->data << " ";
                 p = p->next;
             }
+            cout << endl;
         }
     }
 
@@ -213,13 +214,13 @@ class singly{
 
     void reverse(){
         if(list==NULL)
-            cout << "No Element in the linked list.";
+            cout << "No Element in the linked list." << endl;
         else{
             struct node *temp;
             q = s = list;
             temp = NULL;
             r = q->next;
-            while(r->next!=NULL){
+            while(r!=NULL){
                 temp = q;
                 q = r;
                 r = q->next;
@@ -227,7 +228,7 @@ class singly{
             }
             list = q;
             s->next = NULL;
-            cout << "Linked List has been reversed.";
+            cout << "Linked List has been reversed." << endl;
         }
     }
 
@@ -236,7 +237,7 @@ class singly{
         int temp;
         while(p->next!=NULL){
             q = p->next;
-            while(q->next!=NULL){
+            while(q!=NULL){
                 if(p->data > q->data){
                     temp = p->data;
                     p->data = q->data;
@@ -246,6 +247,7 @@ class singly{
             }
             p = p->next;
         }
+        cout << "List has been sorted." << endl;
     }
 };
 
