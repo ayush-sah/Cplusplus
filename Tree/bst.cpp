@@ -142,7 +142,9 @@ class bst{
     }
 
     void inorder_nonrec(struct node *l){
-
+        if(l){
+            
+        }
     }
 
     void preorder_rec(struct node *l){
