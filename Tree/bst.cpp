@@ -141,9 +141,30 @@ class bst{
         }
     }
 
-    void inorder_nonrec(struct node *l){
-        if(l){
-            
+    void inorder_nonrec(){
+        if(list){
+            p = list;
+            while(p){
+                if(p->lptr==NULL){
+                    cout << p->data << " ";
+                    p = p->rptr;
+                }
+                else{
+                    q = p->lptr;
+                    while((q->rptr) && (q->rptr!=p))
+                        q = q->rptr;
+                    
+                    if(q->rptr!=p){
+                        q->rptr = p;
+                        p = p->lptr;
+                    }
+                    else{
+                        cout << p->data << " ";
+                        q->rptr = NULL;
+                        p = p->rptr;
+                    }
+                }
+            }
         }
     }
 
@@ -155,8 +176,31 @@ class bst{
         }
     }
 
-    void preorder_nonrec(struct node *l){
-
+    void preorder_nonrec(){
+        if(list){
+            p = list;
+            while(p){
+                if(p->lptr==NULL){
+                    cout << p->data << " ";
+                    p = p->rptr;
+                }
+                else{
+                    q = p->lptr;
+                    while((q->rptr) && (q->rptr!=p))
+                        q = q->rptr;
+                    
+                    if(q->rptr==p){
+                        q->rptr = NULL;
+                        p = p->rptr;
+                    }
+                    else{
+                        cout << p->data << " ";
+                        q->rptr = p;
+                        p = p->lptr;
+                    }
+                }
+            }
+        }
     }
 
     void postorder_rec(struct node *l){
@@ -167,15 +211,60 @@ class bst{
         }
     }
 
-    void postorder_nonrec(struct node *l){
+    void postorder_nonrec(){
+        if(list){
+            stack<node *> s1, s2;
+            s1.push(list);
+            
+            while(!s1.empty()){
+                p = s1.top();
+                s1.pop();
+                s2.push(p);
 
+                if(p->lptr)
+                    s1.push(p->lptr);
+                if(p->rptr)
+                    s1.push(p->rptr);
+            }
+
+            while(!s2.empty()){
+                cout << s2.top()->data << " ";
+                s2.pop();
+            }
+        }
     }
 
     void delete_e(){
+        int key;
+        cout << "Enter the element you want to delete: ";
+        cin >> key;
+        if (list == NULL)
+        {
+            cout<<"Tree empty"<<endl;
+            return;
+        }
         
     }
-    void search(){
 
+    void search(){
+        int key, level = -1;
+        cout << "Enter key you want to search: ";
+        cin >> key;
+
+        p = list;
+
+        while(p){
+            level++;
+            if(p->data == key){
+                cout << "Key found at level " << level << endl;
+                return;
+            }
+            else if(p->data > key)
+                p = p->lptr;
+            else
+                p = p->rptr;
+        }
+        cout << "Key not found." << endl;
     }
 };
 
