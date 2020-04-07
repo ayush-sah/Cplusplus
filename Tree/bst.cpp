@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stack>
 using namespace std;
 
 
@@ -21,7 +22,7 @@ class bst{
                     break;
                 case 2:
                     cout << "Elements in the tree are: ";
-                    display(list);
+                    display(list,1);
                     cout << endl;
                     break;
                 case 3:
@@ -32,8 +33,10 @@ class bst{
                     break;
                 case 5:
                     search();
+                    cout << endl;
                     break;
                 case 6:
+                    cout << endl;
                     break;
                 default:
                     cout << "Invalid Input. Please try again." << endl;
@@ -74,11 +77,19 @@ class bst{
                 q->rptr = p;
         }
     }
-    void display(struct node *l){
+    void display(struct node *l, int level){
         if(l){
-            display(l->lptr);
-            cout << l->data << " ";
-            display(l->rptr);
+            display(l->rptr, level+1);
+            cout << endl;
+            if (l == list)
+                cout<<"Root->: ";
+            else
+            {
+                for (int i = 0;i < level;i++)
+                cout<<"\t";
+            }
+            cout<<l->data;
+            display(l->lptr, level+1);
         }
     }
     void traversal(){
@@ -93,9 +104,11 @@ class bst{
                     case 1:
                         cout << "Inorder traversal: ";
                         inorder_rec(list);
+                        cout << endl;
                         break;
                     case 2:
-                        inorder_nonrec(list);
+                        inorder_nonrec();
+                        cout << endl;
                         break;
                     default:
                         cout << "Invalid option. Start Again.";
@@ -107,9 +120,11 @@ class bst{
                     case 1:
                         cout << "Preorder traversal: ";
                         preorder_rec(list);
+                        cout << endl;
                         break;
                     case 2:
-                        preorder_nonrec(list);
+                        preorder_nonrec();
+                        cout << endl;
                         break;
                     default:
                         cout << "Invalid option. Start Again.";
@@ -120,9 +135,11 @@ class bst{
                     case 1:
                         cout << "Postorder traversal: ";
                         postorder_rec(list);
+                        cout << endl;
                         break;
                     case 2:
-                        postorder_nonrec(list);
+                        postorder_nonrec();
+                        cout << endl;
                         break;
                     default:
                         cout << "Invalid option. Start Again.";
@@ -234,7 +251,48 @@ class bst{
         }
     }
 
+    void find(int i,struct node **par,struct node **loc)
+    {
+        /*
+        node *r, *s;
+        if (list == NULL)
+        {
+            *loc = NULL;
+            *par = NULL;
+            return;
+        }
+        if (i == list->data)
+        {
+            *loc = list;
+            *par = NULL;
+            return;
+        }
+        if (i < list->data)
+        r = list->lptr;
+        else
+        r = list->rptr;
+        s = list;
+        while (r)
+        {
+            if (i == r->data)
+            {
+                *loc = r;
+                *par = s;
+                return;
+            }
+            s = r;
+            if (i < ptr->data)
+            r = r->lptr;
+            else
+            r = r->rptr;
+        }
+        *loc = NULL;
+        *par = s;
+        */
+    }
+
     void delete_e(){
+        /*
         int key;
         cout << "Enter the element you want to delete: ";
         cin >> key;
@@ -243,7 +301,61 @@ class bst{
             cout<<"Tree empty"<<endl;
             return;
         }
-        
+        find(i, &par, &loc);
+        if (loc == NULL)
+        {
+            cout<<"Item not present in tree"<<endl;
+            return;
+        }
+        if (loc->lptr == NULL && loc->rptr == NULL)
+        {
+            if (par == NULL)
+                list = NULL;
+            else
+            {
+                if (loc == par->lptr)
+                    par->lptr = NULL;
+                else
+                    par->rptr = NULL;
+            }
+            cout<<"item deleted"<<endl;
+        }
+        if (loc->lptr!= NULL && loc->rptr == NULL)
+        {
+            if (loc->lptr!= NULL)
+                s = loc->lptr;
+            else
+                s = loc->rptr;
+            if (par == NULL)
+                list = s;
+            else
+            {
+                if (loc == par->l)
+                    par->lptr = s;
+                else
+                    par->rptr = s;
+            }
+            cout<<"item deleted"<<endl;
+        }
+        if (loc->lptr== NULL && loc->rptr != NULL)
+        {
+            if (loc->lptr!= NULL)
+                s = loc->lptr;
+            else
+                s = loc->rptr;
+            if (par == NULL)
+                list = s;
+            else
+            {
+                if (loc == par->l)
+                    par->lptr = s;
+                else
+                    par->rptr = s;
+            }
+            cout<<"item deleted"<<endl;
+        }
+        free(loc);
+        */
     }
 
     void search(){
