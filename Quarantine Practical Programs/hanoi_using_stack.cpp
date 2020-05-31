@@ -1,5 +1,3 @@
-//Write a program to implement Tower of Hanoi using Stack.
-
 #include<bits/stdc++.h>
 using namespace std;
 

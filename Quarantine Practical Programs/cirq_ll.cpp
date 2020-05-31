@@ -1,5 +1,3 @@
-//Write a program to implement circular queue using linked list
-
 #include<iostream>
 using namespace std;
 

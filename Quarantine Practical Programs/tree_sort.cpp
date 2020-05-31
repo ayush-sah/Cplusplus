@@ -1,5 +1,3 @@
-//Write a program to implement tree sort.
-
 #include<iostream>
 #include<stack>
 using namespace std;
